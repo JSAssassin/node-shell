@@ -1,3 +1,11 @@
+
+// We want to write the output
+// and then display the prompt
+const done = (output) => {
+  process.stdout.write(output);
+  process.stdout.write("\nprompt > ");
+}
+
 process.stdout.write("prompt > ");
 // gets the  pwd.js module which is a function.
 let pwd = require('./pwd.js');
@@ -12,21 +20,18 @@ let curl = require('./curl.js');
 process.stdin.on("data", data => {
   //parameter eg: 'cat bash.js' trim removes spaces in the front and end, and split converts it to array so we can get 'cat'
   const cmd = data.toString().trim().split(' ');
-  console.log(cmd)
   if (cmd[0] === "pwd") {
     //invoke the result which is a function from pwd.js module
-    pwd();
+    pwd(done);
   } else if(cmd[0] === 'ls'){
-    ls();
+    ls(done);
   } else if(cmd[0] === 'cat'){
     //invoke cat which is a function from cat.js module and then pass cmd[1] which is bash.js
-    cat(cmd[1]);
+    cat(cmd[1], done);
   } else if(cmd[0] === 'curl'){
-    curl(cmd[1]);
+    curl(cmd[1], done);
   }
 
-  process.stdout.write("\nprompt > ");
 });
-
 
 

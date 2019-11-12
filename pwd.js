@@ -1,6 +1,9 @@
 //outputs file path-----> its a function because it has to be used multiple times
-function displayCwd(){
-  process.stdout.write(`${process.cwd()}`);
+// done is a callback that we can give our output to
+function displayCwd(done){
+  // get the current working directory from the process
+  let output = process.cwd();
+  done(output);
 }
 
 
